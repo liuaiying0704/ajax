@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./15 template简单版自写.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <!-- 定义模板 -->
+    <script type="text/html" id="tpl-user">
+      <div>姓名:{{name}}</div>
+      <div>年龄:{{age}}</div>
+      <div>性别:{{gender}}</div>
+      <div>住址:{{address}}</div>
+    </script>
+    <script>
+      // 定义数据
+      const data = {
+        name: '小吴',
+        age: 20,
+        gender: '男',
+        address: '地扫地或扫地',
+      };
+
+      const htmlStr = template('tpl-user', data);
+      document.getElementById('app').innerHTML = htmlStr;
+    </script>
+  </body>
+</html>

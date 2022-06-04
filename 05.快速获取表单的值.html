@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./lib/jquery.js"></script>
+  </head>
+  <body>
+    <form action="/login" id="f1">
+      <input type="text" name="user_name" />
+      <input type="password" name="password" />
+      <button type="submit">提交</button>
+    </form>
+    <script>
+      $(function () {
+        $('#f1').submit(function (e) {
+          e.preventDefault();
+          // 快速获取表单的值serialize，，首先，input都要带name=''
+          // const formData = $(this).serialize();
+          const formData1 = $('#f1').serialize(); //当点击了提交按钮，就会打印。
+          console.log(formData1); //user_name=11&password=aaaaa
+        });
+      });
+    </script>
+  </body>
+</html>

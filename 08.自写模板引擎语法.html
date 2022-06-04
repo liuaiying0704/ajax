@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 1、导入模板引擎文件 -->
+    <script src="./lib/template-web.js"></script>
+    <script src="./lib/jquery.js"></script>
+  </head>
+
+  <body>
+    <!-- 入口文件app -->
+    <div id="app"></div>
+
+    <!-- 3、定义模板，当html解析============================ -->
+    <!--<script type="text/javascript">type默认值text/javascript  -->
+    <!-- 改脚本语言type   text/html -->
+    <!-- 1、模板内不要注释掉代码    2、这里使用的是data内的数据，省略data.name，见步骤4-->
+    <!-- 遍历each 不写数组、对象名，，遍历data左右的数据 -->
+    <script type="text/html" id="tpl-user">
+      <h1>我的名字：{{name}}-------我的年龄：{{age}}</h1>
+      <h1>{{age}}</h1>
+      <h1>{{@text}}</h1>
+      <div>{{flag?msg.uname:''}}</div>
+      {{if flag===1}} 当flag等于1时输出 {{else if flag===0}} 当flag等于0时输出
+      {{/if}}
+
+      <ul>
+        {{each hobby}}
+        <li>我的爱好{{$index+1}}是{{$value}}</li>
+        {{/each}}
+      </ul>
+
+      {{date | filterTime}}
+    </script>
+
+    <script>
+      // 定义补0函数
+
+      function padZero(n) {
+        return n < 10 ? '0' + n : n;
+      }
+      // 定义过滤函数（过滤器）
+      template.defaults.imports.filterTime = function (date) {
+        const y = padZero(date.getFullYear());
+        const m = padZero(date.getMonth() + 1);
+        const d = padZero(date.getDate());
+        return y + '-' + m + '-' + d;
+      };
+      // 2、定义数据============================
+      const data = {
+        name: 'zs',
+        age: 20,
+        text: '<h2>TEST</h2>',
+        flag: 1,
+        hobby: ['打牌', '麻将', '13刀'],
+        date: new Date(),
+        msg: {
+          uname: 'liu',
+          age: 20,
+        },
+      };
+
+      // 4、调用函数============================
+      const htmlstr = template('tpl-user', data); //只接受id：tpl-user,#省略
+
+      // 5、渲染页面============================
+      $('#app').html(htmlstr);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const data = {
+      name: '张三'
+    }
+    const arr = "我的名字是{{name}}";
+    const reg = /{{([a-zA-Z]+)}}/
+    const re = reg.exec(arr);
+    const newArr = arr.replace(re[0], data[re[1]]);
+    console.log(newArr);
+
+  </script>
+</body>
+
+</html>
