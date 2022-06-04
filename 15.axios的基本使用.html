@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/axios.js"></script>
+  </head>
+
+  <body>
+    <button id="btn1">发起GET请求</button>
+    <button id="btn2">发起POST请求</button>
+    <button id="btn3">直接使用axios发起GET请求</button>
+    <button id="btn4">直接使用axios发起POST请求</button>
+
+    <script>
+      document.querySelector("#btn1").addEventListener("click", function () {
+        const url = "http://www.liulongbin.top:3006/api/get";
+        const paramsObj = { name: "zs", age: 20 };
+        axios.get(url, { params: paramsObj }).then((res) => {
+          console.log(res);
+        });
+      });
+
+      document.querySelector("#btn2").addEventListener("click", function () {
+        const url = "http://www.liulongbin.top:3006/api/post";
+        const dataObj = { address: "杭州", location: "江干区" };
+        axios.post(url, dataObj).then((res) => {
+          console.log(res);
+        });
+      });
+
+      document.querySelector("#btn3").addEventListener("click", function () {
+        const url = "http://www.liulongbin.top:3006/api/get";
+        const paramsData = { name: "钢铁侠", age: 35 };
+        axios({
+          method: "GET",
+          url,
+          params: paramsData,
+        }).then((res) => {
+          console.log(res);
+        });
+      });
+
+      document
+        .querySelector("#btn4")
+        .addEventListener("click", async function () {
+          const url = "http://www.liulongbin.top:3006/api/post";
+          const data = { name: "娃哈哈", age: 18, gender: "女" };
+          const res = await axios({ method: "POST", url, data });
+          // const res1 = await axios({ method: "POST", url, data: {uname: res.name} })
+          // const res2 = await axios({ method: "POST", url, data: {uname: res1.name} })
+          console.log(res);
+        });
+
+      // async await
+    </script>
+  </body>
+</html>

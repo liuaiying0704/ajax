@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <form id="form">
+      <input type="text" name="uname" autocomplete="off" />
+      <input type="password" name="upwd" />
+      <button type="submit">提交</button>
+    </form>
+
+    <script>
+      // 数据接口： http://www.liulongbin.top:3006/api/formdata
+      // 1. 通过 DOM 操作，获取到 form 表单元素
+      const form = document.querySelector("#form");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const fd = new FormData(form);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://www.liulongbin.top:3006/api/formdata");
+        xhr.send(fd);
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
